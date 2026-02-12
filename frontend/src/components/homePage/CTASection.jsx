@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+// Link import removed for now since we aren't using routing here yet
 
 const CTASection = () => {
   return (
@@ -23,9 +24,10 @@ const CTASection = () => {
             </p>
             <div className="mt-8 flex justify-center">
               <div className="inline-flex rounded-md shadow">
+                {/* Reverted to <a> with href="#" until the Report Form page is ready */}
                 <a
                   href="#"
-                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#1E3A8A] bg-white hover:bg-blue-50"
+                  className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#1E3A8A] bg-white hover:bg-blue-50 transition-colors"
                 >
                   Report Your First Issue
                   <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
