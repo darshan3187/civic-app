@@ -1,65 +1,74 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom'; // 1. Import Link
+import { ArrowRight, BarChart3, CheckCircle, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Spline from '@splinetool/react-spline';
 
 const HomeIntroSection = () => {
   return (
-    <div className="relative bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+    // FIX 1: Changed background to a gradient that goes to PURE WHITE at the bottom
+    <div className="relative bg-gradient-to-b from-slate-50 via-slate-50 to-white overflow-hidden min-h-screen flex flex-col lg:block">
+      
+      {/* Background Decoration */}
+      <div className="absolute top-0 left-0 w-full h-full bg-white opacity-40 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-100 blur-[120px] opacity-50"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full h-full relative z-20">
+        <div className="relative pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-10 h-full flex flex-col justify-center">
           
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-8 sm:px-6 md:mt-16 lg:mt-0 lg:px-6 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              
-              {/* Main Headline */}
-              <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+
+              <h1 className="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl mb-6">
                 <span className="block xl:inline">Report Civic Issues.</span>{' '}
-                <span className="block text-[#0F5C86]">Track Resolution.</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#0F5C86] to-blue-500">
+                  Track Resolution.
+                </span>
               </h1>
               
-              {/* Subheadline */}
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base text-slate-600 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 leading-relaxed">
                 Empower your community with a transparent, digital grievance redressal system. Submit complaints, monitor status, and ensure municipal accountability in real-time.
               </p>
               
-              {/* Call to Action Buttons */}
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                
-                {/* Button 1: Report Issue */}
-                <div className="rounded-md shadow">
+              <div className="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
+                <div className="rounded-md shadow-lg shadow-blue-900/20">
                   <Link 
-                    to="/dashboard" // Changed to Link
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#1E3A8A] hover:bg-[#152C6F] md:py-4 md:text-lg md:px-10 transition-colors"
+                    to="/dashboard" 
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-[#1E3A8A] hover:bg-[#152C6F] md:py-4 md:text-lg md:px-10 transition-all duration-200 hover:-translate-y-0.5"
                   >
                     Report an Issue <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </div>
-                
-                {/* Button 2: View Live Dashboard */}
-                <div className="mt-3 sm:mt-0 sm:ml-3">
+                <div className="mt-3 sm:mt-0">
                   <Link 
-                    to="/dashboard" // Changed to Link
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-[#0F5C86] bg-indigo-50 hover:bg-indigo-100 md:py-4 md:text-lg md:px-10 transition-colors"
+                    to="/dashboard"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-slate-200 text-base font-medium rounded-lg text-[#0F5C86] bg-white hover:bg-slate-50 md:py-4 md:text-lg md:px-10 transition-colors shadow-sm"
                   >
                     View Live Dashboard
                   </Link>
                 </div>
-                
               </div>
 
-              {/* Key Metrics / Social Proof */}
-              <div className="mt-10 grid grid-cols-3 gap-8 border-t border-gray-100 pt-8">
-                <div>
-                  <div className="text-3xl font-bold text-gray-900">1,247</div>
-                  <div className="text-sm text-gray-500 mt-1">Issues Resolved</div>
+              {/* Metrics */}
+              {/* FIX 2: Removed border-t and added extra padding bottom to breathe */}
+              <div className="mt-12 grid grid-cols-3 gap-6 pt-8 relative z-20 pr-4 pb-12">
+                <div className="flex flex-col">
+                  <div className="flex items-center text-3xl font-bold text-slate-900">
+                    1,247 <CheckCircle className="w-5 h-5 ml-2 text-green-500 opacity-50" />
+                  </div>
+                  <div className="text-sm font-medium text-slate-500 mt-1">Issues Resolved</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-gray-900">3.2 Days</div>
-                  <div className="text-sm text-gray-500 mt-1">Avg. Response Time</div>
+                  <div className="flex items-center text-3xl font-bold text-slate-900">
+                    3.2 <Clock className="w-5 h-5 ml-2 text-blue-500 opacity-50" />
+                  </div>
+                  <div className="text-sm font-medium text-slate-500 mt-1">Days Avg Response</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-gray-900">98%</div>
-                  <div className="text-sm text-gray-500 mt-1">Citizen Satisfaction</div>
+                  <div className="flex items-center text-3xl font-bold text-slate-900">
+                    98% <BarChart3 className="w-5 h-5 ml-2 text-purple-500 opacity-50" />
+                  </div>
+                  <div className="text-sm font-medium text-slate-500 mt-1">Citizen Satisfaction</div>
                 </div>
               </div>
 
@@ -68,14 +77,23 @@ const HomeIntroSection = () => {
         </div>
       </div>
       
-      {/* Image Section */}
-      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-gray-50">
-        <img
-          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
-          alt="Smart city urban infrastructure"
+      {/* SPLINE CONTAINER */}
+      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-[80%] h-[500px] lg:h-full z-0">
+        
+        {/* Left Fade (Keep this) */}
+        <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent z-10 pointer-events-none hidden lg:block"></div>
+        
+        {/* FIX 3: Bottom Fade
+           This gradient goes from Transparent (top) -> White (bottom).
+           It hides the hard bottom edge of the Spline scene. 
+        */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+
+        <Spline 
+            className="w-full h-full"
+            scene="https://prod.spline.design/63AHVUB7hO9a3hzh/scene.splinecode" 
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent lg:via-white/20"></div>
+
       </div>
     </div>
   );
